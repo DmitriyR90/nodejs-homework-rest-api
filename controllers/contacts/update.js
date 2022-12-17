@@ -5,8 +5,10 @@ const Joi = require('joi');
 const schema = Joi.object({
   name: Joi.string().alphanum().min(3).max(30),
   phone: Joi.number().positive(),
-  email: Joi.string().email(),
-});
+  email: Joi.string().email().message('{{#label}} must be a valid email'),
+})
+  .min(1)
+  .message('missing fields');
 
 const updateById = async (req, res, next) => {
   try {
