@@ -1,3 +1,4 @@
 const contactsSchemas = require('./contacts');
+const usersSchemas = require('./users');
 
-module.exports = { contactsSchemas };
+module.exports = { contactsSchemas, usersSchemas };
