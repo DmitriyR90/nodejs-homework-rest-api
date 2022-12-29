@@ -1,8 +1,8 @@
 const Joi = require('joi');
 
 const addSchema = Joi.object({
-  name: Joi.string().alphanum().min(3).max(30).required(),
-  phone: Joi.number().positive().required(),
+  name: Joi.string().min(3).max(30).required(),
+  phone: Joi.string().required(),
   email: Joi.string().email().required(),
   favorite: Joi.boolean(),
 }).messages({

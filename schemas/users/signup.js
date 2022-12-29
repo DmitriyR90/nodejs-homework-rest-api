@@ -1,9 +1,9 @@
 const Joi = require('joi');
 
 const signupSchema = Joi.object({
-  password: Joi.string().min(3).max(30).required(),
+  password: Joi.string().min(6).max(30).required(),
   email: Joi.string().email().required(),
-  subscription: Joi.string(),
+  subscription: Joi.string().valid('starter', 'pro', 'business'),
 }).messages({
   'string.base': `"" should be a type of string`,
   'string.empty': `"" must contain value`,

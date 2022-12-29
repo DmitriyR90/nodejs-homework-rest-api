@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { validation, ctrlWraper } = require('../../middlewares');
+const { validation, ctrlWraper, userAuth } = require('../../middlewares');
 const { users: ctrl } = require('../../controllers');
 const { usersSchemas } = require('../../schemas');
 
@@ -10,6 +10,23 @@ router.post(
   '/signup',
   validation(usersSchemas.signupSchema),
   ctrlWraper(ctrl.signup)
+);
+
+router.post(
+  '/login',
+  validation(usersSchemas.loginSchema),
+  ctrlWraper(ctrl.login)
+);
+
+router.get('/current', userAuth, ctrlWraper(ctrl.getCurrent));
+
+router.post('/logout', userAuth, ctrlWraper(ctrl.logout));
+
+router.patch(
+  '/',
+  userAuth,
+  validation(usersSchemas.updateSubscriptionSchema),
+  ctrlWraper(ctrl.updateSubscription)
 );
 
 module.exports = router;
