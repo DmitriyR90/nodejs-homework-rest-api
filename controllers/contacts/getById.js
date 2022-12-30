@@ -1,4 +1,3 @@
-// const contactsOperations = require('../../models/contacts');
 const { NotFound } = require('http-errors');
 const { Contact } = require('../../models/contacts');
 
