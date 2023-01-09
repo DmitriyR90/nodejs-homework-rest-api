@@ -1,10 +1,10 @@
 const { Conflict } = require('http-errors');
 // const bcrypt = require('bcrypt');
+const gravatar = require('gravatar');
 
 const { User } = require('../../models');
 
 const signup = async (req, res) => {
-  console.log();
   const { password, email, subscription } = req.body;
 
   const user = await User.findOne({ email });
@@ -18,7 +18,9 @@ const signup = async (req, res) => {
   //   email,
   //   subscription,
   // });
-  const newUser = new User({ email, subscription });
+
+  const avatarURL = gravatar.url(email);
+  const newUser = new User({ email, subscription, avatarURL });
   newUser.setPassword(password);
   newUser.save();
 
@@ -27,6 +29,7 @@ const signup = async (req, res) => {
     user: {
       email,
       subscription: newUser.subscription,
+      avatarURL,
     },
   });
 };
