@@ -29,4 +29,7 @@ router.patch(
   ctrlWraper(ctrl.updateSubscription)
 );
 
+router.get('/verify/:verificationToken', ctrlWraper(ctrl.verifyEmail));
+router.post('/verify/', ctrlWraper(ctrl.verifyEmail));
+
 module.exports = router;
