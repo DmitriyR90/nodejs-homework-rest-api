@@ -1,4 +1,5 @@
 const { Conflict } = require('http-errors');
+const gravatar = require('gravatar');
 const { v4 } = require('uuid');
 const { sendEmail } = require('../../helpers');
 const { PORT } = process.env;
@@ -14,7 +15,14 @@ const signup = async (req, res) => {
   }
 
   const verificationToken = v4();
-  const newUser = new User({ email, subscription, verificationToken });
+  const avatarURL = gravatar.url(email);
+
+  const newUser = new User({
+    email,
+    subscription,
+    avatarURL,
+    verificationToken,
+  });
   newUser.setPassword(password);
   await newUser.save();
 
@@ -31,6 +39,7 @@ const signup = async (req, res) => {
     user: {
       email,
       subscription: newUser.subscription,
+      avatarURL,
     },
   });
 };
